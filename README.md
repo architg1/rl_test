@@ -30,6 +30,7 @@ See the following manuals for further information.
 # This is the Reinforcement Learning Challenge. 
 ## Your Task, should you choose to take it, is to create an agent throught Reinforcement Learning
 ---
+# Before you start with this challenge please FORK this repo and implement your solution in the forked repo.
 ## 1. Rational for this test
 According to DJI, the Robomaster needs to be able to navigate in the battle arena autonomous and fire on target if opponent is spotted. Therefore, we believe Reinforcement Learning is best suitted for this task. Thus, we are recruiting students who are good at designing Reinforcement Learning Models.
 
