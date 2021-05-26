@@ -80,4 +80,4 @@ class Zones:
 
     def is_zone_active(self, zone_type: str):
         index = self.get_index_by_type(zone_type)
-        return self.activation_status(index)
+        return self.activation_status[index]

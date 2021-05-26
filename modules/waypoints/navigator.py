@@ -6,13 +6,14 @@ import json
 import cv2
 from scipy import interpolate
 import numpy as np
-sys.path.append(os.getcwd() + '/../..')
 from modules.waypoints.navigation_graph import NavigationGraph
 from modules.geometry import to_draw_coords
 
 WINDOW_NAME = 'Navigation Graph'
 DATA_FILE_PATH = pathlib.Path('revised_graph.json')
 CURVE_COLOR = (255, 0, 100)
+
+sys.path.append(os.getcwd() + '/../..')
 
 
 class Navigator:
@@ -39,7 +40,7 @@ class Navigator:
             graph = self.graph.copy()
             edge_nodes = [from_node, to_node]
             for node in avoid_nodes:
-                if node not in edge_nodes:
+                if node not in edge_nodes and node in graph:
                     graph.remove_node(node)
             path = networkx.shortest_path(graph, from_node, to_node, weight='weight')
             for node in edge_nodes:
@@ -52,17 +53,16 @@ class Navigator:
                 min_index = len(path)
                 for node in avoid_nodes:
                     if node in path:
-                        id =  path.index(node)
+                        id = path.index(node)
                         if id < min_index:
                             min_index = id
-                path =  path[:min_index]
+                path = path[:min_index]
                 return path
             except networkx.exception.NetworkXNoPath:
                 return None
 
     def interpolate(self, path, count_points=50):
         centers = [self.nodes[i] for i in path]
-        print(centers)
         # noinspection PyTupleAssignmentBalance
         tck, u = interpolate.splprep(np.transpose(centers), s=0)
         x, y = interpolate.splev(np.linspace(0, 1, count_points), tck)
@@ -86,20 +86,13 @@ if __name__ == "__main__":
     graph.draw_edges(image)
     graph.draw_nodes(image)
 
-    #avoid = [4, 17, 18, 19]
-    #path = navigator.navigate(0, 31, avoid_nodes=avoid)
     avoid = [18, 4, 10]
     path = navigator.navigate(6, 15, avoid_nodes=avoid)
 
     if path is not None:
-        # points =  navigator.interpolate(path)
         points =  navigator.straight_line(path)
-        print(points)
         navigator.draw_curve(image, *points)
         graph.draw_path(image, path, avoid_nodes=avoid)
-        print(f'Path found: {path}')
-    else:
-        print('No path was found.')
 
     cv2.imshow(WINDOW_NAME, image)
     while cv2.waitKey(0) != 27:

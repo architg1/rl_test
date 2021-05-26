@@ -8,7 +8,9 @@ class State(object):
         self.zone_info = {}
         for zone_type in ZONE.types.keys():
             id = zones.get_index_by_type(zone_type)
-            self.zone_info[zone_type] = ZONE.centers[id] if id < len(ZONE.centers) else mirror(ZONE.centers[id%len(ZONE.centers)])
+            activation_status = zones.is_zone_active(zone_type)
+            self.zone_info[zone_type] = dict(coord = mirror(ZONE.centers[id//2]) if id%2 else ZONE.centers[id//2], status = activation_status)
+
 
 class Transition(object):
     def __init__(self, old_state: State, new_state: State, action, reward):

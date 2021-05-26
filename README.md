@@ -1,29 +1,19 @@
-# This is the Reinforcement Learning Challenge. 
-## Your Task, should you choose to take it, is to create an agent throught Reinforcement Learning
----
-## 1. Rational for this test
-According to DJI, the Robomaster needs to be able to navigate in the battle arena autonomous and fire on target if opponent is spotted. Therefore, we believe Reinforcement Learning is best suitted for this task. Thus, we are recruiting students who are good at designing Reinforcement Learning Models.
+# NTU RoboMaster AI Challenge Simulator
 
-## 2. Your Task
-Design an agent who is able to navigate in this arena autonomously and preferable eliminate the opponent at the end of this simulation.
+RoboMaster AI Challenge Simulator (RMAICS), is a 2D simulation environment designed for the [ICRA 2021 RoboMaster AI Challenge](https://www.robomaster.com/en-US/robo/icra).
+ Its main function is to provide a simulation environment for intelligent decision-making groups to train neural networks.
+ 
+![demo](docs/demo.gif)
 
-Please define your agent in the `rl_agent_actor.py`: [rl_agent_actor.py](rl_agent_actor.py)
 
-## 3. Setting Up Environment
-All the required library is found in the requirements.txt
+## 1. Dependencies
 
-To install required library:
-`
-pip install -r requirements.txt
-`
+* [numpy](https://numpy.org/)
+* [pygame](https://www.pygame.org/) for visualization only
+* [networkx](https://networkx.org/) for waypoint navigation
 
-## 4. Restriction
-You are **NOT** allow to modify the environment variable (HP of Robot, Movement Speed ect). However, if you wish to add some parameters in the environment, feel free to do that!
 
-Files that you are **NOT** allowed to modify:
-* actor.py (Your Rule Based Opponent)
-
-## 5. Other Information
+## 2. User Guides
 
 The simulation consists of two levels:
 > The high-level training interface class: `rmaics`  
@@ -33,3 +23,8 @@ See the following manuals for further information.
 * High-level training interface in `rmaics.py`: [rmaics.md](docs/rmaics.md)
 * Low-level implementation in `kernel.py`: [kernel.md](docs/kernel.md)
 * Instructions for `record_player.py`: [record_player.md](docs/record_player.md)
+* Instructions for controls: [operation.md](docs/operation.md)
+* Parameter format: [params.md](docs/params.md)
+* Further improvements to `kernel.py`: [future.md](docs/future.md)
+
+*This simulator is adapted from UBC Robomaster AI Challenge Simulator

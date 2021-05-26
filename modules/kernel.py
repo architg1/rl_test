@@ -29,6 +29,7 @@ class Kernel(object):
         self.car_count = robot_count
         self.render = render
         self.time, self.bullets, self.epoch, self.n, self.stat, self.memory, self.transitions, self.robots = None, None, None, None, None, None, None, None
+        self.red_hp, self.blue_hp = None, None
         self.zones = Zones()
         self.reset()
 
@@ -79,6 +80,7 @@ class Kernel(object):
             robot.commands = command
         for _ in range(TIME.step):
             self.one_epoch()
+        self.compute_team_hp()
         return State(self.time, self.zones, self.robots)
 
     def one_epoch(self):
@@ -196,6 +198,15 @@ class Kernel(object):
                     data = self.font.render(f'{label}: {value:.1f}', False, COLOR.black)
                     self.screen.blit(data, (x_position, TEXT.stat_position[1] + (i + 1) * TEXT.stat_increment[1]))
         pygame.display.flip()
+
+    def compute_team_hp(self):
+        blue_hp, red_hp = 0, 0
+        for robot in self.robots:
+            if robot.is_blue:
+                blue_hp += robot.hp
+            else:
+                red_hp += robot.hp
+        self.blue_hp, self.red_hp =  blue_hp, red_hp
 
     def receive_commands(self, ignored_robot_ids=[None]):
         """ Get keyboard commands for controlling the robot.
