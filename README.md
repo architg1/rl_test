@@ -48,9 +48,9 @@ pip install -r requirements.txt
 `
 
 ## 4. Restriction
-You are **NOT** allow to modify the environment variable (HP of Robot, Movement Speed ect). However, if you wish to add some parameters in the environment, feel free to do that!
+You are **NOT** allow to modify the environment variable (HP of Robot, Movement Speed ect).
 
 Files that you are **NOT** allowed to modify:
-* actor.py (Your Rule Based Opponent)
+* **ALL** files in the modules folder
 
 *This simulator is adapted from UBC Robomaster AI Challenge Simulator
